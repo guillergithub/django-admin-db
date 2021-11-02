@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Estudiantes</title>
+</head>
+
+<body>
+  <div style="width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: flex-start; flex-flow: column;">    
+    <div style="text-align: center;">
+      <h3>Agrega un Estudiante: </h3>
+      <form action="/students/" method="POST">
+        {% csrf_token %}
+
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <div style="display: flex; width: 60%; margin: 0 auto; justify-content: space-between;">
+            <div><label for="">Nombre</label><input name="nombre" type="text"></div>
+            <div><label for="">Edad</label><input name="edad" type="text"></div>
+            <div><label for="">Correo</label><input name="correo" type="text"></div>
+          </div>
+            <button type="submit">Agregar estudiante</button>
+        </div>
+
+      </form>
+    </div>
+    <div>
+      <h3>Lista de estudiantes: </h3>
+      <ul>
+        {% for student in students %}
+        <li>
+          <a href={{student.id}}>{{student.nombre}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</body>
+
+</html>
