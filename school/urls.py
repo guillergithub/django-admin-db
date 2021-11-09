@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from students.views import studentsList, studentDetail
+from students.views import AllStudentsViewSet, UpdateUserViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('students/', studentsList),
-    path('students/<id>', studentDetail)
+    path('students/', AllStudentsViewSet.as_view()),
+    path('students/<pk>', UpdateUserViewSet.as_view())
+    # path('students/', studentsList),
+    # path('students/<id>', studentDetail)
 ]

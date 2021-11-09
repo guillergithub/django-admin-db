@@ -1,22 +1,20 @@
-from django.shortcuts import render
 from students.models import Student
+from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView)
+from students.serializers import StudentSerializer
 
 # Create your views here.
-def studentsList(request):
-  list = Student.objects.all()
-  context = { 'students': list }
-  if (request.method == 'POST'):
-    try:
-      Student.objects.create(nombre=request.POST['nombre'], edad=request.POST['edad'], correo=request.POST['correo'])
-      print('El estudiante se ha creado satisfactoriamente')
-    except:
-      print('Error al crear un usuario')    
-      
-    print(list)
-    return render(request, 'students/list.html', context)
+class AllStudentsViewSet (ListCreateAPIView): 
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
-def studentDetail(request, id): 
-  student = Student.objects.get(id=id)
-  context = { 'student': student }
-  print(student)
-  return render(request, 'students/detail.html', context)
+
+class UpdateUserViewSet (RetrieveUpdateDestroyAPIView):  
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+
+
+
+
+
